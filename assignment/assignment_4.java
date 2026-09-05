@@ -2,34 +2,36 @@ import java.util.HashMap;
 
 public class SubarraySumEqualsK {
 
-    public static int subarraySum(int[] nums, int k) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+```
+public static int subarraySum(int[] nums, int k) {
+    HashMap<Integer, Integer> map = new HashMap<>();
 
-        // Empty prefix
-        map.put(0, 1);
+    map.put(0, 1);
 
-        int currentSum = 0;
-        int count = 0;
+    int currentSum = 0;
+    int count = 0;
 
-        for (int num : nums) {
-            currentSum += num;
+    for (int num : nums) {
+        currentSum += num;
 
-            if (map.containsKey(currentSum - k)) {
-                count += map.get(currentSum - k);
-            }
-
-            map.put(currentSum,
-                    map.getOrDefault(currentSum, 0) + 1);
+        if (map.containsKey(currentSum - k)) {
+            count += map.get(currentSum - k);
         }
 
-        return count;
+        map.put(currentSum,
+                map.getOrDefault(currentSum, 0) + 1);
     }
 
-    public static void main(String[] args) {
-        int[] nums = {1, 1, 1};
-        int k = 2;
+    return count;
+}
 
-        System.out.println("Number of subarrays: "
-                + subarraySum(nums, k));
-    }
+public static void main(String[] args) {
+    int[] nums = {1, 1, 1};
+    int k = 2;
+
+    System.out.println("Number of subarrays: "
+            + subarraySum(nums, k));
+}
+```
+
 }
