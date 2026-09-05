@@ -1,23 +1,23 @@
 import java.util.Scanner;
 
-public class ATMValidator {
+public class VotingEligibility {
 
-    static void checkPinLength(String pin) {
-        if (pin.length() != 4) {
-            System.out.println("Invalid PIN — must be exactly 4 digits.");
+    static void checkVotingEligibility(int age) {
+        if (age >= 18) {
+            System.out.println("Eligible to vote");
         } else {
-            System.out.println("PIN length OK.");
+            System.out.println("Not eligible to vote");
         }
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter PIN: ");
-        String pin = scanner.nextLine();
+        System.out.print("Enter age: ");
+        int age = sc.nextInt();
 
-        checkPinLength(pin);
+        checkVotingEligibility(age);
 
-        scanner.close();
+        sc.close();
     }
 }

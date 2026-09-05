@@ -1,31 +1,21 @@
 import java.util.Scanner;
 
-public class ProductInventory {
+public class PrintNumbers {
 
-    static void parseInventoryRecord(String csvLine) {
-
-        String[] fields = csvLine.split(",");
-
-        if (fields.length != 3) {
-            System.out.println("Invalid Record");
-        } else {
-            System.out.println(
-                "Product: " + fields[0] +
-                " | SKU: " + fields[1] +
-                " | Qty: " + fields[2]
-            );
+    static void printNumbersUpToN(int n) {
+        for (int i = 1; i <= n; i++) {
+            System.out.println(i);
         }
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sc.nextInt();
 
-        System.out.print("Enter product details: ");
-        String csvLine = scanner.nextLine();
+        printNumbersUpToN(n);
 
-        parseInventoryRecord(csvLine);
-
-        scanner.close();
+        sc.close();
     }
 }

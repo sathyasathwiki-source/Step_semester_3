@@ -1,61 +1,27 @@
 import java.util.Scanner;
 
-public class LibraryISBN {
+public class SumNaturalNumbers {
 
-    static String normalizeCode(String raw) {
+    static void sumOfNaturalNumbers(int n) {
+        int sum = 0;
+        int i = 1;
 
-        raw = raw.trim();
-
-        String publisher = raw.substring(0, 3).toUpperCase();
-
-        return publisher + raw.substring(3);
-    }
-
-    static String validateAndFormat(String code) {
-
-        if (code.length() != 13) {
-            return "Invalid: wrong length";
+        while (i <= n) {
+            sum = sum + i;
+            i++;
         }
 
-        for (int i = 0; i < 3; i++) {
-            if (!Character.isLetter(code.charAt(i))) {
-                return "Invalid: publisher code must be 3 letters";
-            }
-        }
-
-        for (int i = 3; i < 13; i++) {
-            if (!Character.isDigit(code.charAt(i))) {
-                return "Invalid: remaining characters must be digits";
-            }
-        }
-
-        String publisher = code.substring(0, 3);
-        String year = code.substring(3, 7);
-        String catalog = code.substring(7, 13);
-
-        StringBuilder result = new StringBuilder();
-
-        result.append("[");
-        result.append(publisher);
-        result.append("] YEAR: ");
-        result.append(year);
-        result.append(" | CATALOG: ");
-        result.append(catalog);
-
-        return result.toString();
+        System.out.println("Sum of numbers from 1 to " + n + " = " + sum);
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sc.nextInt();
 
-        System.out.print("Enter ISBN code: ");
-        String raw = scanner.nextLine();
+        sumOfNaturalNumbers(n);
 
-        String code = normalizeCode(raw);
-
-        System.out.println(validateAndFormat(code));
-
-        scanner.close();
+        sc.close();
     }
 }

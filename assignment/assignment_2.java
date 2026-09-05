@@ -1,39 +1,25 @@
 import java.util.Scanner;
 
-public class WordReversalEncoder {
+public class NumberClassifier {
 
-    static String reverseEachWord(String sentence) {
-
-        String[] words = sentence.split(" ");
-        StringBuilder result = new StringBuilder();
-
-        for (int i = 0; i < words.length; i++) {
-
-            StringBuilder reversedWord = new StringBuilder();
-
-            for (int j = words[i].length() - 1; j >= 0; j--) {
-                reversedWord.append(words[i].charAt(j));
-            }
-
-            result.append(reversedWord);
-
-            if (i < words.length - 1) {
-                result.append(" ");
-            }
+    static void classifyNumber(int number) {
+        if (number > 0) {
+            System.out.println("Positive");
+        } else if (number < 0) {
+            System.out.println("Negative");
+        } else {
+            System.out.println("Zero");
         }
-
-        return result.toString();
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = sc.nextInt();
 
-        System.out.print("Enter a sentence: ");
-        String sentence = scanner.nextLine();
+        classifyNumber(number);
 
-        System.out.println("Output: " + reverseEachWord(sentence));
-
-        scanner.close();
+        sc.close();
     }
 }

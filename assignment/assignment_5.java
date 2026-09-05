@@ -1,68 +1,27 @@
 import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
 
-public class WordFrequency {
+public class SumNaturalNumbers {
 
-    static void printFilteredWordFrequency(String feedback) {
+    static void sumOfNaturalNumbers(int n) {
+        int sum = 0;
+        int i = 1;
 
-        String[] stopWords = {
-            "the", "was", "and", "a", "is", "of", "in"
-        };
-
-        feedback = feedback.toLowerCase();
-
-        feedback = feedback.replace(".", "");
-        feedback = feedback.replace(",", "");
-
-        String[] words = feedback.split("\\s+");
-
-        HashMap<String, Integer> frequency = new HashMap<>();
-
-        for (String word : words) {
-
-            boolean isStopWord = false;
-
-            for (String stopWord : stopWords) {
-                if (word.equals(stopWord)) {
-                    isStopWord = true;
-                    break;
-                }
-            }
-
-            if (!isStopWord && !word.isEmpty()) {
-
-                if (frequency.containsKey(word)) {
-                    frequency.put(word, frequency.get(word) + 1);
-                } else {
-                    frequency.put(word, 1);
-                }
-            }
+        while (i <= n) {
+            sum = sum + i;
+            i++;
         }
 
-        List<Map.Entry<String, Integer>> list =
-                new ArrayList<>(frequency.entrySet());
-
-        list.sort((a, b) -> b.getValue().compareTo(a.getValue()));
-
-        for (Map.Entry<String, Integer> entry : list) {
-            System.out.println(
-                entry.getKey() + ": " + entry.getValue()
-            );
-        }
+        System.out.println("Sum of numbers from 1 to " + n + " = " + sum);
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter N: ");
+        int n = sc.nextInt();
 
-        System.out.println("Enter feedback:");
-        String feedback = scanner.nextLine();
+        sumOfNaturalNumbers(n);
 
-        printFilteredWordFrequency(feedback);
-
-        scanner.close();
+        sc.close();
     }
 }
