@@ -1,23 +1,35 @@
-import java.util.Scanner;
+public class ProductExceptSelf {
 
-public class VotingEligibility {
+```
+public static int[] productExceptSelf(int[] nums) {
+    int n = nums.length;
+    int[] answer = new int[n];
 
-    static void checkVotingEligibility(int age) {
-        if (age >= 18) {
-            System.out.println("Eligible to vote");
-        } else {
-            System.out.println("Not eligible to vote");
-        }
+    answer[0] = 1;
+
+    for (int i = 1; i < n; i++) {
+        answer[i] = answer[i - 1] * nums[i - 1];
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    int rightProduct = 1;
 
-        System.out.print("Enter age: ");
-        int age = sc.nextInt();
-
-        checkVotingEligibility(age);
-
-        sc.close();
+    for (int i = n - 1; i >= 0; i--) {
+        answer[i] = answer[i] * rightProduct;
+        rightProduct = rightProduct * nums[i];
     }
+
+    return answer;
+}
+
+public static void main(String[] args) {
+    int[] nums = {1, 2, 3, 4};
+
+    int[] result = productExceptSelf(nums);
+
+    for (int num : result) {
+        System.out.print(num + " ");
+    }
+}
+```
+
 }

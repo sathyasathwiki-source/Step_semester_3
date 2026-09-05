@@ -1,27 +1,28 @@
-import java.util.Scanner;
+public class FindMinimum {
 
-public class SumNaturalNumbers {
+```
+public static int findMin(int[] nums) {
+    int left = 0;
+    int right = nums.length - 1;
 
-    static void sumOfNaturalNumbers(int n) {
-        int sum = 0;
-        int i = 1;
+    while (left < right) {
+        int mid = left + (right - left) / 2;
 
-        while (i <= n) {
-            sum = sum + i;
-            i++;
+        if (nums[mid] > nums[right]) {
+            left = mid + 1;
+        } else {
+            right = mid;
         }
-
-        System.out.println("Sum of numbers from 1 to " + n + " = " + sum);
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    return nums[left];
+}
 
-        System.out.print("Enter N: ");
-        int n = sc.nextInt();
+public static void main(String[] args) {
+    int[] nums = {3, 4, 5, 1, 2};
 
-        sumOfNaturalNumbers(n);
+    System.out.println("Minimum element: " + findMin(nums));
+}
+```
 
-        sc.close();
-    }
 }

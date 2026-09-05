@@ -1,35 +1,49 @@
-import java.util.Scanner;
+public class MergeTwoSortedArrays {
 
-public class MaskedPhoneNumber {
+```
+public static int[] mergeSortedArrays(int[] arr1, int[] arr2) {
+    int[] result = new int[arr1.length + arr2.length];
 
-    static String maskPhoneNumber(String phone) {
+    int i = 0;
+    int j = 0;
+    int k = 0;
 
-        if (phone.length() != 10) {
-            return "Invalid phone number";
+    while (i < arr1.length && j < arr2.length) {
+        if (arr1[i] < arr2[j]) {
+            result[k] = arr1[i];
+            i++;
+        } else {
+            result[k] = arr2[j];
+            j++;
         }
-
-        for (int i = 0; i < phone.length(); i++) {
-            if (!Character.isDigit(phone.charAt(i))) {
-                return "Invalid phone number";
-            }
-        }
-
-        String lastFourDigits = phone.substring(6);
-
-        StringBuilder maskedNumber =
-                new StringBuilder("XXXXXX" + lastFourDigits);
-
-        maskedNumber.insert(6, "-");
-
-        return maskedNumber.toString();
+        k++;
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter phone number: ");
-        String phone = scanner.nextLine();
-
-        System.out.println(maskPhoneNumber(phone));
+    while (i < arr1.length) {
+        result[k] = arr1[i];
+        i++;
+        k++;
     }
+
+    while (j < arr2.length) {
+        result[k] = arr2[j];
+        j++;
+        k++;
+    }
+
+    return result;
+}
+
+public static void main(String[] args) {
+    int[] arr1 = {1, 3, 5};
+    int[] arr2 = {2, 4, 6};
+
+    int[] result = mergeSortedArrays(arr1, arr2);
+
+    for (int num : result) {
+        System.out.print(num + " ");
+    }
+}
+```
+
 }

@@ -1,27 +1,30 @@
-import java.util.Scanner;
+public class BestTimeToBuySellStock {
 
-public class CSVStudentRecordParser {
+```
+public static int maxProfit(int[] prices) {
+    int minPrice = prices[0];
+    int maxProfit = 0;
 
-    static void parseStudentRecord(String csvLine) {
-        String[] fields = csvLine.split(",");
+    for (int i = 1; i < prices.length; i++) {
+        if (prices[i] < minPrice) {
+            minPrice = prices[i];
+        }
 
-        if (fields.length != 3) {
-            System.out.println("Invalid Record");
-        } else {
-            System.out.println(
-                "Name: " + fields[0] +
-                " | Roll No: " + fields[1] +
-                " | Dept: " + fields[2]
-            );
+        int profit = prices[i] - minPrice;
+
+        if (profit > maxProfit) {
+            maxProfit = profit;
         }
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    return maxProfit;
+}
 
-        System.out.print("Enter student record: ");
-        String csvLine = scanner.nextLine();
+public static void main(String[] args) {
+    int[] prices = {7, 1, 5, 3, 6, 4};
 
-        parseStudentRecord(csvLine);
-    }
+    System.out.println("Maximum Profit: " + maxProfit(prices));
+}
+```
+
 }

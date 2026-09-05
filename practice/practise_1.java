@@ -1,32 +1,26 @@
-import java.util.Scanner;
+public class TwoSum {
 
-public class VowelConsonantCounter {
-
-    static void countVowelsAndConsonants(String text) {
-        int vowels = 0;
-        int consonants = 0;
-
-        for (int i = 0; i < text.length(); i++) {
-            char ch = Character.toLowerCase(text.charAt(i));
-
-            if (ch == 'a' || ch == 'e' || ch == 'i' ||
-                ch == 'o' || ch == 'u') {
-                vowels++;
-            } else if (ch >= 'a' && ch <= 'z') {
-                consonants++;
+```
+public static int[] twoSum(int[] nums, int target) {
+    for (int i = 0; i < nums.length; i++) {
+        for (int j = i + 1; j < nums.length; j++) {
+            if (nums[i] + nums[j] == target) {
+                return new int[]{i, j};
             }
         }
-
-        System.out.println("Vowels: " + vowels);
-        System.out.println("Consonants: " + consonants);
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    return new int[]{};
+}
 
-        System.out.print("Enter a string: ");
-        String text = scanner.nextLine();
+public static void main(String[] args) {
+    int[] nums = {2, 7, 11, 15};
+    int target = 9;
 
-        countVowelsAndConsonants(text);
-    }
+    int[] result = twoSum(nums, target);
+
+    System.out.println("[" + result[0] + ", " + result[1] + "]");
+}
+```
+
 }

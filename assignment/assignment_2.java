@@ -1,25 +1,23 @@
-import java.util.Scanner;
+public class MaximumSubarray {
 
-public class NumberClassifier {
+```
+public static int maxSubArray(int[] nums) {
+    int currentSum = nums[0];
+    int maxSum = nums[0];
 
-    static void classifyNumber(int number) {
-        if (number > 0) {
-            System.out.println("Positive");
-        } else if (number < 0) {
-            System.out.println("Negative");
-        } else {
-            System.out.println("Zero");
-        }
+    for (int i = 1; i < nums.length; i++) {
+        currentSum = Math.max(nums[i], currentSum + nums[i]);
+        maxSum = Math.max(maxSum, currentSum);
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    return maxSum;
+}
 
-        System.out.print("Enter a number: ");
-        int number = sc.nextInt();
+public static void main(String[] args) {
+    int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
 
-        classifyNumber(number);
+    System.out.println("Maximum Sum: " + maxSubArray(nums));
+}
+```
 
-        sc.close();
-    }
 }

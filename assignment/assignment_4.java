@@ -1,27 +1,37 @@
-import java.util.Scanner;
+import java.util.HashMap;
 
-public class SumNaturalNumbers {
+public class SubarraySumEqualsK {
 
-    static void sumOfNaturalNumbers(int n) {
-        int sum = 0;
-        int i = 1;
+```
+public static int subarraySum(int[] nums, int k) {
+    HashMap<Integer, Integer> map = new HashMap<>();
 
-        while (i <= n) {
-            sum = sum + i;
-            i++;
+    map.put(0, 1);
+
+    int currentSum = 0;
+    int count = 0;
+
+    for (int num : nums) {
+        currentSum += num;
+
+        if (map.containsKey(currentSum - k)) {
+            count += map.get(currentSum - k);
         }
 
-        System.out.println("Sum of numbers from 1 to " + n + " = " + sum);
+        map.put(currentSum,
+                map.getOrDefault(currentSum, 0) + 1);
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    return count;
+}
 
-        System.out.print("Enter N: ");
-        int n = sc.nextInt();
+public static void main(String[] args) {
+    int[] nums = {1, 1, 1};
+    int k = 2;
 
-        sumOfNaturalNumbers(n);
+    System.out.println("Number of subarrays: "
+            + subarraySum(nums, k));
+}
+```
 
-        sc.close();
-    }
 }

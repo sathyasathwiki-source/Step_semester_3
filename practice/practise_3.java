@@ -1,31 +1,23 @@
-import java.util.Scanner;
+public class ContainsDuplicate {
 
-public class FileExtensionValidator {
-
-    static String validateFileExtension(String filename) {
-        int index = filename.lastIndexOf('.');
-
-        if (index == -1 || index == filename.length() - 1) {
-            return "Rejected - invalid file type";
-        }
-
-        String extension = filename.substring(index + 1);
-
-        if (extension.equalsIgnoreCase("pdf") ||
-            extension.equalsIgnoreCase("docx") ||
-            extension.equalsIgnoreCase("zip")) {
-            return "Accepted";
-        } else {
-            return "Rejected - invalid file type";
+```
+public static boolean containsDuplicate(int[] nums) {
+    for (int i = 0; i < nums.length; i++) {
+        for (int j = i + 1; j < nums.length; j++) {
+            if (nums[i] == nums[j]) {
+                return true;
+            }
         }
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    return false;
+}
 
-        System.out.print("Enter filename: ");
-        String filename = scanner.nextLine();
+public static void main(String[] args) {
+    int[] nums = {1, 2, 3, 1};
 
-        System.out.println(validateFileExtension(filename));
-    }
+    System.out.println(containsDuplicate(nums));
+}
+```
+
 }

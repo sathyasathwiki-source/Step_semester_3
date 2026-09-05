@@ -1,72 +1,28 @@
-import java.util.Scanner;
+public class RotateArray {
 
-public class BankTransactionReference {
+```
+public static int[] rotateArray(int[] nums, int k) {
+    k = k % nums.length;
 
-    static String normalizeReference(String raw) {
-        String reference = raw.trim();
+    int[] newArray = new int[nums.length];
 
-        if (reference.length() < 3) {
-            return reference;
-        }
-
-        String bankCode = reference.substring(0, 3).toUpperCase();
-        String remaining = reference.substring(3);
-
-        return bankCode + remaining;
+    for (int i = 0; i < nums.length; i++) {
+        newArray[(i + k) % nums.length] = nums[i];
     }
 
-    static String validateAndFormat(String reference) {
+    return newArray;
+}
 
-        if (reference.length() != 14) {
-            return "Invalid: wrong length";
-        }
+public static void main(String[] args) {
+    int[] nums = {1, 2, 3, 4, 5, 6, 7};
+    int k = 3;
 
-        // Validate first 3 characters
-        for (int i = 0; i < 3; i++) {
-            if (!Character.isLetter(reference.charAt(i))) {
-                return "Invalid: bank code must be 3 letters";
-            }
-        }
+    int[] result = rotateArray(nums, k);
 
-        // Validate remaining 11 characters
-        for (int i = 3; i < 14; i++) {
-            if (!Character.isDigit(reference.charAt(i))) {
-                return "Invalid: body must contain only digits";
-            }
-        }
-
-        String bankCode = reference.substring(0, 3);
-        String date = reference.substring(3, 9);
-        String sequence = reference.substring(9, 14);
-
-        String day = date.substring(0, 2);
-        String month = date.substring(2, 4);
-        String year = date.substring(4, 6);
-
-        StringBuilder result = new StringBuilder();
-
-        result.append("[")
-              .append(bankCode)
-              .append("] DATE: ")
-              .append(day)
-              .append("/")
-              .append(month)
-              .append("/")
-              .append(year)
-              .append(" | SEQ: ")
-              .append(sequence);
-
-        return result.toString();
+    for (int num : result) {
+        System.out.print(num + " ");
     }
+}
+```
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter transaction reference: ");
-        String raw = scanner.nextLine();
-
-        String normalizedReference = normalizeReference(raw);
-
-        System.out.println(validateAndFormat(normalizedReference));
-    }
 }
