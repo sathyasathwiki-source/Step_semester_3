@@ -17,5 +17,7 @@ public class VotingEligibility {
         int age = sc.nextInt();
 
         checkVotingEligibility(age);
+
+        sc.close();
     }
 }

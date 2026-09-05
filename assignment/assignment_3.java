@@ -15,4 +15,7 @@ public class PrintNumbers {
         int n = sc.nextInt();
 
         printNumbersUpToN(n);
+
+        sc.close();
     }
+}

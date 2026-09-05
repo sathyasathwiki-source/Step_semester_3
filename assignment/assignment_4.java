@@ -21,5 +21,7 @@ public class SumNaturalNumbers {
         int n = sc.nextInt();
 
         sumOfNaturalNumbers(n);
+
+        sc.close();
     }
 }

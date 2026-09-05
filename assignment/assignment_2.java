@@ -19,5 +19,7 @@ public class NumberClassifier {
         int number = sc.nextInt();
 
         classifyNumber(number);
+
+        sc.close();
     }
 }
