@@ -1,32 +1,33 @@
-import java.util.Arrays;
+class Employee {
+    String empId;
+    String empName;
+    double salary;
+    boolean isIntern;
 
-public class Main {
-    static int[] findTopThreeScores(int[] scores) {
-        int first = Integer.MIN_VALUE;
-        int second = Integer.MIN_VALUE;
-        int third = Integer.MIN_VALUE;
-
-        for (int score : scores) {
-            if (score > first) {
-                third = second;
-                second = first;
-                first = score;
-            } else if (score > second) {
-                third = second;
-                second = score;
-            } else if (score > third) {
-                third = score;
-            }
-        }
-
-        return new int[]{first, second, third};
+    Employee(String empId, String empName, double salary) {
+        this.empId = empId;
+        this.empName = empName;
+        this.salary = salary;
+        this.isIntern = false;
     }
 
-    public static void main(String[] args) {
-        int[] scores = {45, 90, 75, 60, 85, 95};
+    Employee(String empId, String empName) {
+        this(empId, empName, 0.0);
+        this.isIntern = true;
+    }
 
-        System.out.println(
-            Arrays.toString(findTopThreeScores(scores))
-        );
+    void printProfile() {
+        System.out.printf("%s | %s | Rs %.1f | Intern: %b%n",
+                          empId, empName, salary, isIntern);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Employee e1 = new Employee("E-101", "Divya", 65000);
+        Employee e2 = new Employee("E-102", "Arjun");
+
+        e1.printProfile();
+        e2.printProfile();
     }
 }

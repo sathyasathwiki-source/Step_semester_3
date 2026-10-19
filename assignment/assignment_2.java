@@ -1,21 +1,49 @@
-public class Main {
-    static String findDuplicateTeam(String[] names) {
-        for (int i = 0; i < names.length; i++) {
-            for (int j = i + 1; j < names.length; j++) {
-                if (names[i].equals(names[j])) {
-                    return "Duplicate Found: " + names[i];
-                }
-            }
-        }
+class MessWallet {
+    private double balance;
 
-        return "No Duplicates Found";
+    MessWallet(double opening) {
+        if (opening < 0) {
+            System.out.println("Invalid opening balance");
+            balance = 0;
+        } else {
+            balance = opening;
+        }
     }
 
-    public static void main(String[] args) {
-        String[] teams = {
-            "ByteForce", "CodeCrafters", "ByteForce"
-        };
+    void topUp(double amount) {
+        if (amount <= 0) {
+            System.out.println("Top-up rejected");
+        } else {
+            balance += amount;
+        }
+    }
 
-        System.out.println(findDuplicateTeam(teams));
+    void deduct(double amount) {
+        if (amount <= 0) {
+            System.out.println("Invalid deduction");
+        } else if (amount > balance) {
+            System.out.println("Deduct rejected: insufficient balance");
+        } else {
+            balance -= amount;
+        }
+    }
+
+    double getBalance() {
+        return balance;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MessWallet wallet = new MessWallet(500);
+
+        wallet.topUp(200);
+        System.out.println("Balance after top-up: "
+                           + wallet.getBalance());
+
+        wallet.deduct(1000);
+
+        System.out.println("Final balance: "
+                           + wallet.getBalance());
     }
 }

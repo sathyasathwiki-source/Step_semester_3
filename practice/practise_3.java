@@ -1,24 +1,33 @@
-public class Main {
-    static String findMinMaxSpread(int[] scores) {
-        int min = scores[0];
-        int max = scores[0];
+class Course {
+    String code;
+    String title;
+    int credits;
+    int labCredits;
 
-        for (int i = 1; i < scores.length; i++) {
-            if (scores[i] < min)
-                min = scores[i];
-
-            if (scores[i] > max)
-                max = scores[i];
-        }
-
-        return "Min: " + min +
-               " | Max: " + max +
-               " | Spread: " + (max - min);
+    Course(String code, String title, int credits, int labCredits) {
+        this.code = code;
+        this.title = title;
+        this.credits = credits;
+        this.labCredits = labCredits;
     }
 
-    public static void main(String[] args) {
-        int[] scores = {45, 82, 79, 90, 33, 90, 61};
+    Course(String code, String title, int credits) {
+        this(code, title, credits, 0);
+    }
 
-        System.out.println(findMinMaxSpread(scores));
+    int totalCredits() {
+        return credits + labCredits;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Course c1 = new Course("21CSC201J", "Data Structures", 4);
+        Course c2 = new Course("21CSC205L", "DSA Lab", 3, 1);
+
+        System.out.println(c1.code + " total credits: "
+                           + c1.totalCredits());
+        System.out.println(c2.code + " total credits: "
+                           + c2.totalCredits());
     }
 }

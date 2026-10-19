@@ -1,18 +1,31 @@
-import java.util.Arrays;
+class BookInventory {
+    String title;
+    String author;
+    int copiesAvailable;
 
-public class Main {
-    static void applyMultipliers(double[] scores,
-                                 int captainIndex,
-                                 int viceCaptainIndex) {
-        scores[captainIndex] *= 2;
-        scores[viceCaptainIndex] *= 1.5;
+    BookInventory(String title, String author, int copiesAvailable) {
+        this.title = title;
+        this.author = author;
+        this.copiesAvailable = copiesAvailable;
     }
 
+    void printEntry() {
+        System.out.println(title + ", " + author + ", "
+                           + copiesAvailable + " available");
+    }
+}
+
+public class Main {
     public static void main(String[] args) {
-        double[] scores = {40, 55, 30, 62};
+        BookInventory[] books = {
+            new BookInventory("Clean Code", "Robert C. Martin", 3),
+            new BookInventory("Effective Java", "Joshua Bloch", 5),
+            new BookInventory("Refactoring", "Martin Fowler", 0),
+            new BookInventory("Design Patterns", "GoF", 2)
+        };
 
-        applyMultipliers(scores, 1, 3);
-
-        System.out.println(Arrays.toString(scores));
+        for (BookInventory b : books) {
+            b.printEntry();
+        }
     }
 }

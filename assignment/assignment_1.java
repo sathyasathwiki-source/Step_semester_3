@@ -1,17 +1,31 @@
-import java.util.Arrays;
+class PlacementRecord {
+    String studentName;
+    String company;
+    double packageLpa;
 
-public class Main {
-    static void curveScores(int[] scores, int bonus) {
-        for (int i = 0; i < scores.length; i++) {
-            scores[i] += bonus;
-        }
+    PlacementRecord(String studentName, String company,
+                    double packageLpa) {
+        this.studentName = studentName;
+        this.company = company;
+        this.packageLpa = packageLpa;
     }
 
+    void printRecord() {
+        System.out.printf("%s -> %s @ %.1f LPA%n",
+                          studentName, company, packageLpa);
+    }
+}
+
+public class Main {
     public static void main(String[] args) {
-        int[] scores = {70, 85, 60};
+        PlacementRecord[] records = {
+            new PlacementRecord("Ravi", "TCS", 4.5),
+            new PlacementRecord("Anitha", "Zoho", 6.2),
+            new PlacementRecord("Karthik", "Infosys", 4.0)
+        };
 
-        curveScores(scores, 10);
-
-        System.out.println(Arrays.toString(scores));
+        for (PlacementRecord r : records) {
+            r.printRecord();
+        }
     }
 }

@@ -1,69 +1,29 @@
-import java.util.Arrays;
-
-class Player implements Comparable<Player> {
+class Student {
     String name;
-    int matchesPlayed;
-    double battingAverage;
-    boolean injured;
+    int attendance;
 
-    Player(String name, int matchesPlayed,
-           double battingAverage, boolean injured) {
+    static String collegeName =
+        "SRM Institute of Science and Technology";
+
+    static int studentCount = 0;
+
+    Student(String name, int attendance) {
         this.name = name;
-        this.matchesPlayed = matchesPlayed;
-        this.battingAverage = battingAverage;
-        this.injured = injured;
+        this.attendance = attendance;
+        studentCount++;
     }
 
-    static boolean isDraftable(int matchesPlayed) {
-        return matchesPlayed >= 10;
-    }
-
-    static boolean isDraftable(int matchesPlayed, boolean injured) {
-        return matchesPlayed >= 5 && !injured;
-    }
-
-    public int compareTo(Player other) {
-        return Double.compare(
-            other.battingAverage, this.battingAverage
-        );
-    }
-
-    static String draftAndRank(Player[] players) {
-        Player[] eligible = new Player[players.length];
-        int count = 0;
-
-        for (Player p : players) {
-            if (isDraftable(p.matchesPlayed) ||
-                isDraftable(p.matchesPlayed, p.injured)) {
-                eligible[count++] = p;
-            }
-        }
-
-        eligible = Arrays.copyOf(eligible, count);
-        Arrays.sort(eligible);
-
-        String result = "";
-
-        for (int i = 0; i < eligible.length; i++) {
-            if (i > 0)
-                result += " | ";
-
-            result += (i + 1) + ". " + eligible[i].name;
-        }
-
-        return result;
+    static void printCollegeInfo() {
+        System.out.println(collegeName);
+        System.out.println("Students created: " + studentCount);
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Player[] players = {
-            new Player("Virat", 15, 48.0, false),
-            new Player("Rahul", 7, 55.0, false),
-            new Player("Sameer", 3, 60.0, false),
-            new Player("Dev", 12, 20.0, true)
-        };
+        Student s1 = new Student("Ravi", 90);
+        Student s2 = new Student("Priya", 95);
 
-        System.out.println(Player.draftAndRank(players));
+        Student.printCollegeInfo();
     }
 }

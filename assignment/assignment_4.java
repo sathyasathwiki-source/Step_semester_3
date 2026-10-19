@@ -1,37 +1,31 @@
+class HallTicket {
+    String studentName;
+    int seatNumber;
+
+    HallTicket(String studentName, int seatNumber) {
+        this.studentName = studentName;
+        this.seatNumber = seatNumber;
+    }
+}
+
 public class Main {
-    static double rowAverage(int[] row) {
-        int sum = 0;
-
-        for (int i = 0; i < row.length; i++) {
-            sum += row[i];
-        }
-
-        return (double) sum / row.length;
-    }
-
-    static String classifyRows(int[][] scores, int threshold) {
-        String result = "";
-
-        for (int i = 0; i < scores.length; i++) {
-            if (i > 0)
-                result += " | ";
-
-            if (rowAverage(scores[i]) < threshold)
-                result += "Row " + i + ": Quiet Zone";
-            else
-                result += "Row " + i + ": Buzzing Zone";
-        }
-
-        return result;
-    }
-
     public static void main(String[] args) {
-        int[][] scores = {
-            {40, 50, 45},
-            {85, 90, 95},
-            {30, 20, 25}
-        };
+        HallTicket priya = new HallTicket("Priya", 0);
 
-        System.out.println(classifyRows(scores, 60));
+        HallTicket copy = priya;
+        copy.seatNumber = 45;
+
+        System.out.println(
+            "Priya's seatNumber (via first variable):"
+        );
+        System.out.println(priya.seatNumber);
+
+        System.out.println("copy == priya: " + (copy == priya));
+
+        HallTicket separate = new HallTicket("Priya", 45);
+
+        System.out.println(
+            "separate == priya: " + (separate == priya)
+        );
     }
 }
