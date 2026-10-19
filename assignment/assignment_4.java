@@ -1,35 +1,37 @@
-import java.util.HashMap;
+public class Main {
+    static double rowAverage(int[] row) {
+        int sum = 0;
 
-public class SubarraySumEqualsK {
-
-    public static int subarraySum(int[] nums, int k) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-
-        // Empty prefix
-        map.put(0, 1);
-
-        int currentSum = 0;
-        int count = 0;
-
-        for (int num : nums) {
-            currentSum += num;
-
-            if (map.containsKey(currentSum - k)) {
-                count += map.get(currentSum - k);
-            }
-
-            map.put(currentSum,
-                    map.getOrDefault(currentSum, 0) + 1);
+        for (int i = 0; i < row.length; i++) {
+            sum += row[i];
         }
 
-        return count;
+        return (double) sum / row.length;
+    }
+
+    static String classifyRows(int[][] scores, int threshold) {
+        String result = "";
+
+        for (int i = 0; i < scores.length; i++) {
+            if (i > 0)
+                result += " | ";
+
+            if (rowAverage(scores[i]) < threshold)
+                result += "Row " + i + ": Quiet Zone";
+            else
+                result += "Row " + i + ": Buzzing Zone";
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {
-        int[] nums = {1, 1, 1};
-        int k = 2;
+        int[][] scores = {
+            {40, 50, 45},
+            {85, 90, 95},
+            {30, 20, 25}
+        };
 
-        System.out.println("Number of subarrays: "
-                + subarraySum(nums, k));
+        System.out.println(classifyRows(scores, 60));
     }
 }

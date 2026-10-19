@@ -1,21 +1,21 @@
-public class MaximumSubarray {
-
-    public static int maxSubArray(int[] nums) {
-        int currentSum = nums[0];
-        int maxSum = nums[0];
-
-        for (int i = 1; i < nums.length; i++) {
-            currentSum = Math.max(nums[i], currentSum + nums[i]);
-
-            maxSum = Math.max(maxSum, currentSum);
+public class Main {
+    static String findDuplicateTeam(String[] names) {
+        for (int i = 0; i < names.length; i++) {
+            for (int j = i + 1; j < names.length; j++) {
+                if (names[i].equals(names[j])) {
+                    return "Duplicate Found: " + names[i];
+                }
+            }
         }
 
-        return maxSum;
+        return "No Duplicates Found";
     }
 
     public static void main(String[] args) {
-        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        String[] teams = {
+            "ByteForce", "CodeCrafters", "ByteForce"
+        };
 
-        System.out.println("Maximum Sum: " + maxSubArray(nums));
+        System.out.println(findDuplicateTeam(teams));
     }
 }

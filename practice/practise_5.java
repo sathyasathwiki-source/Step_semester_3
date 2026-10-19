@@ -1,24 +1,69 @@
-public class RotateArray {
-    public static int[] rotateArray(int[] nums, int k) {
-        k = k % nums.length;
+import java.util.Arrays;
 
-        int[] newArray = new int[nums.length];
+class Player implements Comparable<Player> {
+    String name;
+    int matchesPlayed;
+    double battingAverage;
+    boolean injured;
 
-        for (int i = 0; i < nums.length; i++) {
-            newArray[(i + k) % nums.length] = nums[i];
-        }
-
-        return newArray;
+    Player(String name, int matchesPlayed,
+           double battingAverage, boolean injured) {
+        this.name = name;
+        this.matchesPlayed = matchesPlayed;
+        this.battingAverage = battingAverage;
+        this.injured = injured;
     }
 
-    public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 4, 5, 6, 7};
-        int k = 3;
+    static boolean isDraftable(int matchesPlayed) {
+        return matchesPlayed >= 10;
+    }
 
-        int[] result = rotateArray(nums, k);
+    static boolean isDraftable(int matchesPlayed, boolean injured) {
+        return matchesPlayed >= 5 && !injured;
+    }
 
-        for (int num : result) {
-            System.out.print(num + " ");
+    public int compareTo(Player other) {
+        return Double.compare(
+            other.battingAverage, this.battingAverage
+        );
+    }
+
+    static String draftAndRank(Player[] players) {
+        Player[] eligible = new Player[players.length];
+        int count = 0;
+
+        for (Player p : players) {
+            if (isDraftable(p.matchesPlayed) ||
+                isDraftable(p.matchesPlayed, p.injured)) {
+                eligible[count++] = p;
+            }
         }
+
+        eligible = Arrays.copyOf(eligible, count);
+        Arrays.sort(eligible);
+
+        String result = "";
+
+        for (int i = 0; i < eligible.length; i++) {
+            if (i > 0)
+                result += " | ";
+
+            result += (i + 1) + ". " + eligible[i].name;
+        }
+
+        return result;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Player[] players = {
+            new Player("Virat", 15, 48.0, false),
+            new Player("Rahul", 7, 55.0, false),
+            new Player("Sameer", 3, 60.0, false),
+            new Player("Dev", 12, 20.0, true)
+        };
+
+        System.out.println(Player.draftAndRank(players));
     }
 }

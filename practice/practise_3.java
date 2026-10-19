@@ -1,19 +1,24 @@
-public class ContainsDuplicate {
-    public static boolean containsDuplicate(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[i] == nums[j]) {
-                    return true;
-                }
-            }
+public class Main {
+    static String findMinMaxSpread(int[] scores) {
+        int min = scores[0];
+        int max = scores[0];
+
+        for (int i = 1; i < scores.length; i++) {
+            if (scores[i] < min)
+                min = scores[i];
+
+            if (scores[i] > max)
+                max = scores[i];
         }
 
-        return false;
+        return "Min: " + min +
+               " | Max: " + max +
+               " | Spread: " + (max - min);
     }
 
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 1};
+        int[] scores = {45, 82, 79, 90, 33, 90, 61};
 
-        System.out.println(containsDuplicate(nums));
+        System.out.println(findMinMaxSpread(scores));
     }
 }

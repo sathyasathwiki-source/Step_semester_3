@@ -1,45 +1,37 @@
-public class MergeTwoSortedArrays {
-    public static int[] mergeSortedArrays(int[] arr1, int[] arr2) {
-        int[] result = new int[arr1.length + arr2.length];
+public class Main {
+    static double rowAverage(int[] row) {
+        int sum = 0;
 
-        int i = 0;
-        int j = 0;
-        int k = 0;
-
-        while (i < arr1.length && j < arr2.length) {
-            if (arr1[i] < arr2[j]) {
-                result[k] = arr1[i];
-                i++;
-            } else {
-                result[k] = arr2[j];
-                j++;
-            }
-            k++;
+        for (int i = 0; i < row.length; i++) {
+            sum += row[i];
         }
 
-        while (i < arr1.length) {
-            result[k] = arr1[i];
-            i++;
-            k++;
-        }
+        return (double) sum / row.length;
+    }
 
-        while (j < arr2.length) {
-            result[k] = arr2[j];
-            j++;
-            k++;
+    static String classifyRows(int[][] scores, int threshold) {
+        String result = "";
+
+        for (int i = 0; i < scores.length; i++) {
+            if (i > 0)
+                result += " | ";
+
+            if (rowAverage(scores[i]) < threshold)
+                result += "Row " + i + ": Quiet Zone";
+            else
+                result += "Row " + i + ": Buzzing Zone";
         }
 
         return result;
     }
 
     public static void main(String[] args) {
-        int[] arr1 = {1, 3, 5};
-        int[] arr2 = {2, 4, 6};
+        int[][] scores = {
+            {40, 50, 45},
+            {85, 90, 95},
+            {30, 20, 25}
+        };
 
-        int[] result = mergeSortedArrays(arr1, arr2);
-
-        for (int num : result) {
-            System.out.print(num + " ");
-        }
+        System.out.println(classifyRows(scores, 60));
     }
 }

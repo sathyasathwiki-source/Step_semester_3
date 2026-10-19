@@ -1,66 +1,32 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class ThreeSum {
+public class Main {
+    static int[] findTopThreeScores(int[] scores) {
+        int first = Integer.MIN_VALUE;
+        int second = Integer.MIN_VALUE;
+        int third = Integer.MIN_VALUE;
 
-    public static int[][] threeSum(int[] nums) {
-        Arrays.sort(nums);
-
-        List<int[]> result = new ArrayList<>();
-
-        for (int i = 0; i < nums.length - 2; i++) {
-
-            // Skip duplicate values
-            if (i > 0 && nums[i] == nums[i - 1]) {
-                continue;
-            }
-
-            int left = i + 1;
-            int right = nums.length - 1;
-
-            while (left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
-
-                if (sum == 0) {
-                    result.add(new int[]{
-                        nums[i],
-                        nums[left],
-                        nums[right]
-                    });
-
-                    left++;
-                    right--;
-
-                    // Skip duplicates
-                    while (left < right &&
-                           nums[left] == nums[left - 1]) {
-                        left++;
-                    }
-
-                    while (left < right &&
-                           nums[right] == nums[right + 1]) {
-                        right--;
-                    }
-
-                } else if (sum < 0) {
-                    left++;
-                } else {
-                    right--;
-                }
+        for (int score : scores) {
+            if (score > first) {
+                third = second;
+                second = first;
+                first = score;
+            } else if (score > second) {
+                third = second;
+                second = score;
+            } else if (score > third) {
+                third = score;
             }
         }
 
-        return result.toArray(new int[result.size()][]);
+        return new int[]{first, second, third};
     }
 
     public static void main(String[] args) {
-        int[] nums = {-1, 0, 1, 2, -1, -4};
+        int[] scores = {45, 90, 75, 60, 85, 95};
 
-        int[][] result = threeSum(nums);
-
-        for (int[] triplet : result) {
-            System.out.println(Arrays.toString(triplet));
-        }
+        System.out.println(
+            Arrays.toString(findTopThreeScores(scores))
+        );
     }
 }

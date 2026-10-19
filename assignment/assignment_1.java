@@ -1,34 +1,17 @@
-public class ProductExceptSelf {
+import java.util.Arrays;
 
-    public static int[] productExceptSelf(int[] nums) {
-        int n = nums.length;
-        int[] answer = new int[n];
-
-        answer[0] = 1;
-
-        // Calculate products of elements to the left
-        for (int i = 1; i < n; i++) {
-            answer[i] = answer[i - 1] * nums[i - 1];
+public class Main {
+    static void curveScores(int[] scores, int bonus) {
+        for (int i = 0; i < scores.length; i++) {
+            scores[i] += bonus;
         }
-
-        // Multiply with products of elements to the right
-        int rightProduct = 1;
-
-        for (int i = n - 1; i >= 0; i--) {
-            answer[i] = answer[i] * rightProduct;
-            rightProduct = rightProduct * nums[i];
-        }
-
-        return answer;
     }
 
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 4};
+        int[] scores = {70, 85, 60};
 
-        int[] result = productExceptSelf(nums);
+        curveScores(scores, 10);
 
-        for (int num : result) {
-            System.out.print(num + " ");
-        }
+        System.out.println(Arrays.toString(scores));
     }
 }

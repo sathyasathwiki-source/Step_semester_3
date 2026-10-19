@@ -1,26 +1,18 @@
-public class BestTimeToBuySellStock {
-    public static int maxProfit(int[] prices) {
-        int minPrice = prices[0];
-        int maxProfit = 0;
-
-        for (int i = 1; i < prices.length; i++) {
-            if (prices[i] < minPrice) {
-                minPrice = prices[i];
-            }
-
-            int profit = prices[i] - minPrice;
-
-            if (profit > maxProfit) {
-                maxProfit = profit;
+public class Main {
+    static String findDuplicatePick(String[] names) {
+        for (int i = 0; i < names.length; i++) {
+            for (int j = i + 1; j < names.length; j++) {
+                if (names[i].equals(names[j])) {
+                    return "Duplicate Found: " + names[i];
+                }
             }
         }
-
-        return maxProfit;
+        return "No Duplicates Found";
     }
 
     public static void main(String[] args) {
-        int[] prices = {7, 1, 5, 3, 6, 4};
+        String[] names = {"Kohli", "Bumrah", "Kohli", "Rohit"};
 
-        System.out.println("Maximum Profit: " + maxProfit(prices));
+        System.out.println(findDuplicatePick(names));
     }
 }
